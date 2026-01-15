@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TO-DO LIST</title>
+</head>
+<body>
+    
+    <h1>TO-DO LIST</h1>
+
+     <form action="to-do list" id="form-todo">
+        <input type="text" name="content" id="content" placeholder="tambahkan todo">
+        <textarea type="text" name="desc" id="desc" placeholder="tambahkan deskripsi"></textarea>
+        <button type="submit" id="todo-submit">tambah</button>
+    </form>
+
+    <ul id="todo-list"></ul>
+
+    <script>
+    const form = document.getElementById('form-todo');
+    const content = document.getElementById('content');
+    const desc = document.getElementById('desc');
+    const todolist = document.getElementById('todo-list');
+
+    form.addEventListener('submit', function(e) { 
+        e.preventDefault(); 
+        
+        //tambah todo
+        const value = content.value;
+        if (!value) {
+            alert("todo list wajib diisi");
+            return;
+        }
+
+        
+
+        // tambah todo untuk di simpan ke locak storage
+        let todos = localStorage.getItem('todos');
+        todos = todos ? JSON.parse(todos) : []; //( "?" kalau misalkan todos ada nilainya simpan ke JSON.parse kalau gaada kosongin)
+        todos.push({ text: content.value,   desc: desc.value });
+        localStorage.setItem('todos', JSON.stringify(todos));
+        renderTodos();
+
+        desc.value = '';
+        content.value = '';
+    });
+
+    
+    function renderTodos() {
+        const stored = localStorage.getItem('todos');
+        const arr = stored ? JSON.parse(stored) : [];
+        todolist.innerHTML = '';
+
+        arr.forEach(function (t, idx) {
+            const li = document.createElement('li');
+            const span = document.createElement('span');
+            span.textContent = t.text + " - " + t.desc;
+            
+            // Tombol Edit
+            const editBtn = document.createElement('button');
+            editBtn.textContent = 'Edit';
+            editBtn.type = 'button';
+
+            //edit node
+            editBtn.addEventListener('click', function () {
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.value = t.text;
+
+               const inputDesc = document.createElement('textarea');
+               desc.value = t.desc;
+
+            
+
+            //save button
+                const saveBtn = document.createElement('button');
+                saveBtn.type = 'button';
+                saveBtn.textContent = 'Simpan';
+
+            //cancel button
+                const cancelBtn = document.createElement('button');
+                cancelBtn.textContent = 'Batal';
+                cancelBtn.type = 'button';
+
+                saveBtn.addEventListener('click', function () {
+                    const newVal = input.value;
+                    const newDesc = desc.value;
+                    if (!newVal) return;
+                    
+                    arr[idx] = {
+                     text: newVal,
+                    desc: newDesc
+                    };
+                    localStorage.setItem('todos', JSON.stringify(arr));
+                    alert('Todo berhasil diperbaharui');
+                    renderTodos();
+                });
+
+                // klik enter untuk save
+                    input.addEventListener('keydown', function(event) {
+                        if (event.key === 'enter') {
+                            event.preventDefault();
+                            saveBtn.click();
+                        }
+                    });
+
+                cancelBtn.addEventListener('click', () => renderTodos());
+
+                li.innerHTML = '';
+                li.appendChild(input);
+                li.appendChild(desc);
+                li.appendChild(saveBtn);
+                li.appendChild(cancelBtn);
+                input.focus();
+            });
+
+            // Tombol Delete
+            const deleteBtn = document.createElement('button');
+            deleteBtn.textContent = ' Hapus';
+            deleteBtn.type = 'button';
+            deleteBtn.addEventListener('click', function () {
+                if (confirm('Yakin ingin menghapus todo ini?')) {
+                    arr.splice(idx, 1);
+                    localStorage.setItem('todos', JSON.stringify(arr));
+                    renderTodos();
+                }
+            });
+
+            li.appendChild(span);
+            li.appendChild(editBtn);
+            li.appendChild(deleteBtn);
+            todolist.appendChild(li);
+        });
+    }
+
+    renderTodos();
+</script>
+
+</body>
+</html>
