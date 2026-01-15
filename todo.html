@@ -64,12 +64,12 @@
 
             //edit node
             editBtn.addEventListener('click', function () {
-                const input = document.createElement('input');
-                input.type = 'text';
-                input.value = t.text;
+                const inputEdit = document.createElement('input');
+                inputEdit.type = 'text';
+                inputEdit.value = t.text;
 
                const inputDesc = document.createElement('textarea');
-               desc.value = t.desc;
+               inputDesc.value = t.desc;
 
             
 
@@ -84,13 +84,13 @@
                 cancelBtn.type = 'button';
 
                 saveBtn.addEventListener('click', function () {
-                    const newVal = input.value;
-                    const newDesc = desc.value;
+                    const newVal = inputEdit.value;
+                    const newDesc = inputDesc.value;
                     if (!newVal) return;
                     
                     arr[idx] = {
-                     text: newVal,
-                    desc: newDesc
+                     text: inputEdit.value,
+                    desc: inputDesc.value
                     };
                     localStorage.setItem('todos', JSON.stringify(arr));
                     alert('Todo berhasil diperbaharui');
@@ -98,18 +98,20 @@
                 });
 
                 // klik enter untuk save
-                    input.addEventListener('keydown', function(event) {
-                        if (event.key === 'enter') {
+                    inputEdit.addEventListener('keydown', function(event) {
+                        if (event.key === 'Enter') {
                             event.preventDefault();
                             saveBtn.click();
                         }
                     });
 
+                     inputEdit.focus();
+
                 cancelBtn.addEventListener('click', () => renderTodos());
 
                 li.innerHTML = '';
-                li.appendChild(input);
-                li.appendChild(desc);
+                li.appendChild(inputEdit);
+                li.appendChild(inputDesc);
                 li.appendChild(saveBtn);
                 li.appendChild(cancelBtn);
                 input.focus();
