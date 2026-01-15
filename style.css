@@ -1,0 +1,145 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #ffb6c1, #ffc0cb, #ffd6e8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    margin-bottom: 20px;
+    color: #5a1a2c;
+    letter-spacing: 2px;
+}
+
+#form-todo {
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .2);
+    backdrop-filter: blur(20px);
+    max-width: 600px;
+    padding: 60px;
+    width: 800px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+#form-todo input,
+#form-todo textarea {
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    resize: none;
+}
+
+#form-todo input:focus,
+#form-todo textarea:focus {
+    outline: none;
+    border-color: #ff7aa2;
+    box-shadow: 0 0 0 2px rgba(255,122,162,0.2);
+}
+
+#todo-submit {
+    background: linear-gradient(135deg, #ff5f9e, #ff85b3);
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+#todo-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255,95,158,0.4);
+}
+
+
+#todo-list {
+    margin-top: 25px;
+    width: 380px;
+    list-style: none;
+    margin-left: 26%;
+    margin-right: auto;
+}
+
+
+#todo-list li {
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .2);
+    backdrop-filter: blur(20px);
+    border-radius: 8px;
+    max-width: 800x;
+    width: 600px;
+    padding: 30px;
+    border-radius: 14px;
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+
+}
+
+
+
+#todo-list span {
+    font-size: 14px;
+    color: #333;
+    line-height: 1.4;
+}
+
+#todo-list li button {
+    margin-right: 6px;
+    margin-top: 6px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    border: none;
+    font-size: 12px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+
+#todo-list li button:nth-child(2) {
+    background: #e6f60d;
+}
+
+#todo-list li button:nth-child(2):hover {
+    background: #ffbf3f;
+}
+
+
+#todo-list li button:nth-child(3) {
+    background: #ef476f;
+    color: white;
+}
+
+#todo-list li button:nth-child(3):hover {
+    background: #d8345f;
+}
+
+#todo-list input,
+#todo-list textarea {
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+#todo-list input:focus,
+#todo-list textarea:focus {
+    outline: none;
+    border-color: #ff7aa2;
+}
